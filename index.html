@@ -10,8 +10,7 @@ const key = 'rsbBzwFGYKpjujiq0GJWUOBQq01GyifiMH9ORjAj';
 const url = 'https://api.nasa.gov/planetary/apod';
 
 axios.get(url+'?api_key='+key).then(function(response) {
-    console.log(response);
-    // document.getElementById('img').src=
+    document.getElementById('img').src=response.data.hdurl
 });
 
 </script>
