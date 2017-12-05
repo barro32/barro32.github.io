@@ -10,7 +10,7 @@ const key = 'rsbBzwFGYKpjujiq0GJWUOBQq01GyifiMH9ORjAj';
 const url = 'https://api.nasa.gov/planetary/apod';
 
 axios.get(url+'?api_key='+key).then(function(response) {
-    document.getElementById('img').src = response.data.hdurl;
+    document.documentElement.style.backgroundImage = 'url('+response.data.hdurl+')';
     document.getElementById('heading').textContent = response.data.title;
     document.getElementById('date').textContent = response.data.date;
     document.getElementById('explanation').textContent = response.data.explanation;
@@ -19,13 +19,15 @@ axios.get(url+'?api_key='+key).then(function(response) {
 </script>
 <style>
     *{margin:0; padding:0;}
-    img { height: 100%; }
+    html { 
+        background: no-repeat center center fixed;
+        background-size: cover;
+    }
 </style>
 </head>
 <body>
-    <h1 id="heading"></h1>
-    <img id="img" src="##">
-    <span id="date"></span>
+    <h1 id="heading">Heading</h1>
+    <span id="date">date</span>
     <p id="explanation"></p>
 </body>
 </html>
