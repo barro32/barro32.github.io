@@ -30,10 +30,18 @@ axios.get(url+'?api_key='+key).then(function(response) {
         bottom: 0;
         position: absolute;
         color: rgba(0,0,0,0);
+        text-shadow: none;
         transition: .5s color;
+    }
+    p:before {
+        content: 'i';
+        width: 1em;
+        border-radius: 100%;
+        background-color: #eee;
     }
     p:hover {
         color: rgba(200,200,200,1);
+        text-shadow: 0 0 10px #000, 0 3px 5px rgba(0,0,0,0.5);
     }
     h1, span, p {
         font-weight: normal;
