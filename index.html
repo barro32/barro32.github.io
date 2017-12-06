@@ -37,14 +37,24 @@ axios.get(url+'?api_key='+key).then(function(response) {
     p:before {
         content: 'i';
         width: 1em;
+        height: 1em;
+        line-height: 1em;
         border-radius: 100%;
         background-color: #eee;
         color: #000;
-        font-family: monospace;
+        display: inline-block;
+        text-align: center;
+        padding: 2px;
+        position: absolute;
+        bottom: 2px;
+        left: 2px;
     }
     p:hover {
         color: rgba(200,200,200,1);
         text-shadow: 0 0 10px #000, 0 3px 5px rgba(0,0,0,0.5);
+    }
+    p:hover:before {
+        display: none;
     }
     h1, span, p {
         font-weight: normal;
