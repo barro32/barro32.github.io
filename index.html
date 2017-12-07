@@ -15,6 +15,11 @@ axios.get(url+'?api_key='+key).then(function(response) {
     document.getElementById('explanation').textContent = response.data.explanation;
 });
 
+let date = new Date();
+
+document.getElementById('date').textContent = `${date.getDate()} ${date.getMonth()+1} ${date.getFullYear()}`;
+document.getElementById('time').textContent = `${date.getHours()}:${date.getMinutes()+1}`;
+
 </script>
 <style>
     * {
@@ -59,10 +64,18 @@ axios.get(url+'?api_key='+key).then(function(response) {
     h1, span, p {
         font-weight: normal;
     }
+    .date-time {
+        position: absolute;
+        right: 0;
+    }
 </style>
 </head>
 <body>
     <h1 id="heading"></h1>
+    <div class="date-time">
+        <span id="date"></span>
+        <span id="time"></span>
+    </div>
     <p id="explanation"></p>
 </body>
 </html>
