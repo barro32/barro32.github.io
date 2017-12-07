@@ -16,7 +16,8 @@ axios.get(url+'?api_key='+key).then(function(response) {
 });
 
 axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((res) => {
-    document.getElementById('btc').textContent = '€'+res.bpi.EUR.rate;
+    // document.getElementById('btc').textContent = '€'+res.bpi.EUR.rate;
+    console.log(res);
 });
 
 let date = new Date();
