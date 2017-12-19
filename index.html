@@ -85,6 +85,7 @@ axios.get(url+'?api_key='+key).then(function(response) {
 });
 
 axios.get('https://api.kraken.com/0/public/Ticker?pair=BTCEUR,ETHEUR').then((res) => {
+    console.log(res.data.result);
     document.getElementById('btc').textContent = '€'+res.data.result.XXBTZEUR.c;
     document.getElementById('btc').textContent = '€'+res.data.result.XETHZEUR.c;
 });
