@@ -48,23 +48,25 @@
     }
     .date-time {
         position: absolute;
-        right: 0;
+        right: 2px;
+        top: 2px;
+        text-align: right;
     }
     #btc:before {
-        content: "BTC - ";
+        content: "BTC ";
     }
     #eth:before {
-        content: "ETH - ";
+        content: "ETH ";
     }
 </style>
 </head>
 <body>
     <h1 id="heading"></h1>
     <div class="date-time">
-        <span id="date"></span>
-        <span id="time"></span>
-        <span id="btc"></span>
-        <span id="eth"></span>
+        <div id="date"></div>
+        <div id="time"></div>
+        <div id="btc"></div>
+        <div id="eth"></div>
     </div>
     <p id="explanation"></p>
 </body>
@@ -82,9 +84,9 @@ axios.get(url+'?api_key='+key).then(function(response) {
     document.getElementById('explanation').textContent = response.data.explanation;
 });
 
-axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((res) => {
-    document.getElementById('btc').textContent = '€'+res.data.bpi.EUR.rate;
-    console.log(res);
+axios.get('https://api.kraken.com/0/public/Ticker?pair=BTCEUR,ETHEUR').then((res) => {
+    document.getElementById('btc').textContent = '€'+res.result.XXBTZEUR.c;
+    document.getElementById('btc').textContent = '€'+res.result.XETHZEUR.c;
 });
 
 let date = new Date();
