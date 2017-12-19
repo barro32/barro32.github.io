@@ -3,29 +3,6 @@
 <head>
     <title>New Tab</title>
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-<script type="text/javascript">
-const key = 'rsbBzwFGYKpjujiq0GJWUOBQq01GyifiMH9ORjAj';
-const url = 'https://api.nasa.gov/planetary/apod';
-
-axios.get(url+'?api_key='+key).then(function(response) {
-    document.documentElement.style.backgroundImage = 'url('+response.data.url+')';
-    document.getElementById('heading').textContent = response.data.title;
-    document.getElementById('explanation').textContent = response.data.explanation;
-});
-
-axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((res) => {
-    // document.getElementById('btc').textContent = '€'+res.bpi.EUR.rate;
-    console.log(res);
-});
-
-let date = new Date();
-
-document.getElementById('date').textContent = `${date.getDate()} ${date.getMonth()+1} ${date.getFullYear()}`;
-document.getElementById('time').textContent = `${date.getHours()}:${date.getMinutes()+1}`;
-
-</script>
 <style>
     * {
         font-family: sans-serif;
@@ -60,8 +37,8 @@ document.getElementById('time').textContent = `${date.getHours()}:${date.getMinu
         left: 2px;
     }
     p:hover {
-        color: rgba(200,200,200,1);
-        text-shadow: 0 0 10px #000, 0 3px 5px rgba(0,0,0,0.5);
+        color: #eee;
+        text-shadow: 0 0 5px #000, 0 2px 4px rgba(0,0,0,0.5);
     }
     p:hover:before {
         display: none;
@@ -91,4 +68,30 @@ document.getElementById('time').textContent = `${date.getHours()}:${date.getMinu
     </div>
     <p id="explanation"></p>
 </body>
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script type="text/javascript">
+const key = 'rsbBzwFGYKpjujiq0GJWUOBQq01GyifiMH9ORjAj';
+const url = 'https://api.nasa.gov/planetary/apod';
+
+axios.get(url+'?api_key='+key).then(function(response) {
+    document.documentElement.style.backgroundImage = 'url('+response.data.url+')';
+    document.getElementById('heading').textContent = response.data.title;
+    document.getElementById('explanation').textContent = response.data.explanation;
+});
+
+axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((res) => {
+    document.getElementById('btc').textContent = '€'+res.data.bpi.EUR.rate;
+    console.log(res);
+});
+
+let date = new Date();
+
+document.getElementById('date').textContent = `${date.getDate()} ${date.getMonth()+1} ${date.getFullYear()}`;
+document.getElementById('time').textContent = `${date.getHours()}:${date.getMinutes()+1}`;
+
+</script>
+
 </html>
