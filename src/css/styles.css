@@ -1,0 +1,54 @@
+* {
+    font-family: sans-serif;
+    text-shadow: 0 0 10px #000, 0 3px 5px rgba(0,0,0,0.5);
+    color: #eee;
+}
+html {
+    background: no-repeat center center fixed;
+    background-size: cover;
+    background-color: #333;
+}
+p {
+    bottom: 0;
+    position: absolute;
+    color: rgba(0,0,0,0);
+    text-shadow: none;
+    transition: .5s color;
+}
+p:before {
+    content: 'i';
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+    border-radius: 100%;
+    background-color: #eee;
+    color: #000;
+    display: inline-block;
+    text-align: center;
+    padding: 2px;
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+}
+p:hover {
+    color: #eee;
+    text-shadow: 0 0 5px #000, 0 2px 4px rgba(0,0,0,0.5);
+}
+p:hover:before {
+    display: none;
+}
+h1, span, p {
+    font-weight: normal;
+}
+.date-time {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    text-align: right;
+}
+#btc:after {
+    content: " BTC";
+}
+#eth:after {
+    content: " ETH";
+}
