@@ -13,8 +13,3 @@ axios.get('https://api.kraken.com/0/public/Ticker?pair=BTCEUR,ETHEUR').then((res
     document.getElementById('btc').textContent = '€'+BTC;
     document.getElementById('eth').textContent = '€'+ETH;
 });
-
-let date = new Date();
-
-document.getElementById('date').textContent = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
-document.getElementById('time').textContent = `${date.getHours()}:${date.getMinutes()+1}`;
