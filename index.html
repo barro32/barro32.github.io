@@ -82,6 +82,7 @@
   const pairs = 'BTCEUR,ETHEUR'
 
   fetch(`${nasaUrl}?api_key=${key}`).then(res => res.json()).then(data => {
+    fetch(data.hdurl).then(res => console.log(res))
     document.documentElement.style.backgroundImage = `url(${data.hdurl})`
     document.getElementById('heading').textContent = data.title
     document.getElementById('explanation').textContent = data.explanation
