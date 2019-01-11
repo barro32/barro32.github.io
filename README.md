@@ -4,9 +4,11 @@
 - Photo description can be viewed hovering over the `i`
 - Date, time, BTC and ETH prices also displayed
 
+## URL
+
 https://barro32.github.io/
 
-## TODO
+### TODO
 - Use high res image after it's loaded ✔
 - Cache image URL ✔
 - Date ✔
