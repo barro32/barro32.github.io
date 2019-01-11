@@ -1,17 +1,15 @@
-* {
-    font-family: sans-serif;
-    text-shadow: 0 0 10px #000, 0 3px 5px rgba(0,0,0,0.5);
-    color: #eee;
-}
 html {
     background: no-repeat center center fixed;
     background-size: cover;
     background-color: #333;
+    color: #eee;
+    font-family: sans-serif;
+    text-shadow: 0 0 10px #000, 0 3px 5px rgba(0,0,0,0.5);
 }
 p {
     bottom: 0;
-    position: absolute;
     color: rgba(0,0,0,0);
+    position: absolute;
     text-shadow: none;
     transition: .5s color;
 }
@@ -45,6 +43,8 @@ h1, span, p {
     right: 2px;
     top: 2px;
     text-align: right;
+    font-family: monospace;
+    font-size: 20px;
 }
 #btc:after {
     content: " BTC";

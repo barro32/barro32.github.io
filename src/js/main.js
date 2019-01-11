@@ -1,15 +1,18 @@
-const key = 'rsbBzwFGYKpjujiq0GJWUOBQq01GyifiMH9ORjAj';
-const url = 'https://api.nasa.gov/planetary/apod';
+const key = 'rsbBzwFGYKpjujiq0GJWUOBQq01GyifiMH9ORjAj'
+const nasaUrl = 'https://api.nasa.gov/planetary/apod'
+const krakenUrl = 'https://api.kraken.com/0/public/Ticker?pair=BTCEUR,ETHEUR'
+const pairs = 'BTCEUR,ETHEUR'
 
-axios.get(url+'?api_key='+key).then(function(response) {
-    document.documentElement.style.backgroundImage = 'url('+response.data.url+')';
-    document.getElementById('heading').textContent = response.data.title;
-    document.getElementById('explanation').textContent = response.data.explanation;
-});
+fetch(`${nasaUrl}?api_key=${key}`).then(res => res.json()).then(data => {
+    console.log(data)
+    document.documentElement.style.backgroundImage = `url(${data.nasaUrl})`
+    document.getElementById('heading').textContent = data.title
+    document.getElementById('explanation').textContent = data.explanation
+})
 
-axios.get('https://api.kraken.com/0/public/Ticker?pair=BTCEUR,ETHEUR').then((res) => {
-    let BTC = Number(res.data.result.XXBTZEUR.c[0]).toFixed(0);
-    let ETH = Number(res.data.result.XETHZEUR.c[0]).toFixed(0);
-    document.getElementById('btc').textContent = 'â‚¬'+BTC;
-    document.getElementById('eth').textContent = 'â‚¬'+ETH;
-});
+fetch(`${krakenUrl}?pair=${pairs}`).then(res => res.json()).then(data => {
+    const BTC = Number(data.result.XXBTZEUR.c[0]).toFixed(0)
+    const ETH = Number(data.result.XETHZEUR.c[0]).toFixed(0)
+    document.getElementById('btc').textContent = `€${BTC}`
+    document.getElementById('eth').textContent = `€${ETH}`
+})
