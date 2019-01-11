@@ -92,12 +92,11 @@
     document.getElementById('time').textContent = time
   }
 
-  const setCache = (data, date) => {
+  const setCacheBase64 = (date, imgUrl) => {
     const img = new Image
     img.crossOrigin = 'Anonymous'
-    img.src = data.hdurl
+    img.src = imgUrl
     img.addEventListener('load', e => {
-      console.log('loaded');
       const canvas = document.createElement('canvas')
       const ctx = canvas.getContext('2d')
 
@@ -106,12 +105,11 @@
       ctx.drawImage(img, 0, 0, img.width, img.height)
 
       const imgDataUrl = canvas.toDataURL("image/png")
-      console.log(imgDataUrl)
-
       window.localStorage.setItem(date, imgDataUrl)
-
     })
   }
+
+  const setCache = (date, imgUrl) => window.localStorage.setItem(date, imgUrl)
 
   const getAPOD = () => {
     const imgUrl = window.localStorage.getItem(date)
@@ -122,7 +120,7 @@
         document.documentElement.style.backgroundImage = `url(${data.hdurl})`
         document.getElementById('heading').textContent = data.title
         document.getElementById('explanation').textContent = data.explanation
-        setCache(data, date)
+        setCache(date, data.hdurl)
       })
     }
   }
