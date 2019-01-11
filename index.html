@@ -81,25 +81,64 @@
   const krakenUrl = 'https://api.kraken.com/0/public/Ticker'
   const pairs = 'BTCEUR,ETHEUR'
 
-  fetch(`${nasaUrl}?api_key=${key}`).then(res => res.json()).then(data => {
-    fetch(data.hdurl).then(res => console.log(res))
-    document.documentElement.style.backgroundImage = `url(${data.hdurl})`
-    document.getElementById('heading').textContent = data.title
-    document.getElementById('explanation').textContent = data.explanation
-  })
-
-  fetch(`${krakenUrl}?pair=${pairs}`).then(res => res.json()).then(data => {
-    const BTC = Number(data.result.XXBTZEUR.c[0]).toFixed(0)
-    const ETH = Number(data.result.XETHZEUR.c[0]).toFixed(0)
-    document.getElementById('btc').textContent = `€${BTC}`
-    document.getElementById('eth').textContent = `€${ETH}`
-  })
 
   // Date and time
-  const date = new Date();
+  const d = new Date()
+  const date = `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`
+  const time = `${d.getHours()}:${d.getMinutes()}`
 
-  document.getElementById('date').textContent = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
-  document.getElementById('time').textContent = `${date.getHours()}:${date.getMinutes()}`
+  const renderDateTime = date => {
+    document.getElementById('date').textContent = date
+    document.getElementById('time').textContent = time
+  }
+
+  const setCache = (data, date) => {
+    const img = new Image
+    img.crossOrigin = 'Anonymous'
+    img.src = data.hdurl
+    img.addEventListener('load', e => {
+      console.log('loaded');
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+
+      canvas.width = img.width
+      canvas.height = img.height
+      ctx.drawImage(img, 0, 0, img.width, img.height)
+
+      const imgDataUrl = canvas.toDataURL("image/png")
+      console.log(imgDataUrl)
+
+      window.localStorage.setItem(date, imgDataUrl)
+
+    })
+  }
+
+  const getAPOD = () => {
+    const imgUrl = window.localStorage.getItem(date)
+    if (imgUrl) {
+      document.documentElement.style.backgroundImage = `url(${imgUrl})`
+    } else {
+      fetch(`${nasaUrl}?api_key=${key}`).then(res => res.json()).then(data => {
+        document.documentElement.style.backgroundImage = `url(${data.hdurl})`
+        document.getElementById('heading').textContent = data.title
+        document.getElementById('explanation').textContent = data.explanation
+        setCache(data, date)
+      })
+    }
+  }
+
+  const getCryptoPairs = () => {
+    fetch(`${krakenUrl}?pair=${pairs}`).then(res => res.json()).then(data => {
+      const BTC = Number(data.result.XXBTZEUR.c[0]).toFixed(0)
+      const ETH = Number(data.result.XETHZEUR.c[0]).toFixed(0)
+      document.getElementById('btc').textContent = `€${BTC}`
+      document.getElementById('eth').textContent = `€${ETH}`
+    })
+  }
+
+  renderDateTime(date)
+  getAPOD()
+  getCryptoPairs()
 
 </script>
 
