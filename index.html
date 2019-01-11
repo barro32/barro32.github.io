@@ -88,7 +88,6 @@
   })
 
   fetch(`${krakenUrl}?pair=${pairs}`).then(res => res.json()).then(data => {
-    console.log(data)
     const BTC = Number(data.result.XXBTZEUR.c[0]).toFixed(0)
     const ETH = Number(data.result.XETHZEUR.c[0]).toFixed(0)
     document.getElementById('btc').textContent = `€${BTC}`
