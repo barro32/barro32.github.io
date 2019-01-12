@@ -15,3 +15,4 @@ https://barro32.github.io/
 - Time ✔
 - Crypto ticker ✔
 - Optimise spead ✔
+- Load low res image first and replace with HD when ready
