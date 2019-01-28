@@ -81,10 +81,9 @@
   const krakenUrl = 'https://api.kraken.com/0/public/Ticker'
   const pairs = 'BTCEUR,ETHEUR'
 
-
   // Date and time
   const d = new Date()
-  const date = `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`
+  const date = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`
   const time = `${d.getHours()}:${d.getMinutes()}`
 
   const renderDateTime = date => {
@@ -109,20 +108,20 @@
     })
   }
 
-  const setCache = (date, imgUrl) => window.localStorage.setItem(date, imgUrl)
+  const setCacheObj = (key, obj) => window.localStorage.setItem(key, JSON.stringify(obj))
+  const getCacheObj = key => JSON.parse(window.localStorage.getItem(key))
 
-  const getAPOD = () => {
-    const imgUrl = window.localStorage.getItem(date)
-    if (imgUrl) {
-      document.documentElement.style.backgroundImage = `url(${imgUrl})`
-    } else {
-      fetch(`${nasaUrl}?api_key=${key}`).then(res => res.json()).then(data => {
-        document.documentElement.style.backgroundImage = `url(${data.hdurl})`
-        document.getElementById('heading').textContent = data.title
-        document.getElementById('explanation').textContent = data.explanation
-        setCache(date, data.hdurl)
-      })
+  const getAPOD = async () => {
+    const data = getCacheObj(date)
+    if (!data) {
+      const res = await fetch(`${nasaUrl}?api_key=${key}`)
+      const data = await res.json()
+      setCacheObj(date, data)
     }
+    const { hdurl, title, explanation } = data
+    document.documentElement.style.backgroundImage = `url(${hdurl})`
+    document.getElementById('heading').textContent = title
+    document.getElementById('explanation').textContent = explanation
   }
 
   const getCryptoPairs = () => {
